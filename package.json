@@ -1,0 +1,16 @@
+{
+  "name": "TranscodeMK2",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
