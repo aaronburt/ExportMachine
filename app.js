@@ -3,5 +3,11 @@ const Render = require('./render');
 
 
 (async () => {
-    console.log(await Render.getVideoMeta('1080.webm'))
+
+
+
+    
+    await Render.Encode(`${__dirname}/public/Wallpaper.mp4`, `${__dirname}/public/1`, 1500, 192, '1920x1080');
+    
+
 })()

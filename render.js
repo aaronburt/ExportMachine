@@ -10,7 +10,7 @@ var Ffmpeg = require('fluent-ffmpeg');
  * @param {string} vFormat Video format or 'container' must be compatable with the codec
  * @param {number} speed This is the speed of the encoder, faster will cost efficency
  */
-var Encode = (inputFile, outputFile, vBitrate, aBitrate, vSize, vCodec = 'libvpx-vp9', vFormat = 'webm', speed = 8) => {
+var Encode = (inputFile, outputFile, vBitrate, aBitrate, vSize, vCodec = 'libvpx-vp9', vFormat = 'webm', speed = 16) => {
     return new Promise((resolve, reject) =>{
         var render = Ffmpeg(inputFile)
             .videoCodec(vCodec)
@@ -18,11 +18,12 @@ var Encode = (inputFile, outputFile, vBitrate, aBitrate, vSize, vCodec = 'libvpx
             .format(vFormat)
             .videoBitrate(vBitrate)
             .audioBitrate(aBitrate)
-            .save(`${outputFile}.${vFormat}`)
-            .outputOptions(speed)
+            .outputOptions(`-speed ${speed}`)
             .on('progress', function(info) { console.log(`${outputFile} | ${Math.round(info.percent * 1000) / 1000 }%`) })
             .on('error', function(err, stdout, stderr) { reject('Error') })
-            .on('end', function() { resolve('encoded') });
+            .on('end', function() { resolve('encoded') })
+            .output(`${outputFile}.${vFormat}`)
+            .run();
     });
 };
 
